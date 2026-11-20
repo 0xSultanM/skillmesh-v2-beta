@@ -1,0 +1,52 @@
+{% extends "web/base.html" %}
+{% load static %}
+
+{% block title %}SkillMesh - Privacy{% endblock %}
+{% block breadcrumb_current %}Privacy{% endblock %}
+{% block nav_analyzer %}{% endblock %}
+{% block nav_tutmesh %}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="page-eyebrow">Privacy</div>
+  <h1 class="page-title">Your career. Your data.</h1>
+  <p class="page-subtitle">A clear look at what happens to your information.</p>
+</div>
+
+<!-- Privacy hero card -->
+<div class="privacy-card">
+  <h2 class="privacy-card-title">Private by design. Not just a setting.</h2>
+  <p class="privacy-card-subtitle">SkillMesh is built so that we never need to keep your data.</p>
+</div>
+
+<!-- Privacy details grid -->
+<div class="privacy-grid">
+  <div class="privacy-item">
+    <div class="privacy-item-num">01</div>
+    <h3 class="privacy-item-title">What happens to your resume</h3>
+    <p>Your file is read in memory on our server to extract its text, then discarded. It is never written to disk or to a database.</p>
+    <p>If AI extraction is enabled, text is sent to our AI provider (Anthropic). We remove email addresses, phone numbers, street addresses and social profile links first.</p>
+    <p>We don't log request contents.</p>
+  </div>
+  
+  <div class="privacy-item">
+    <div class="privacy-item-num">02</div>
+    <h3 class="privacy-item-title">Job postings</h3>
+    <p>Job URLs are fetched once to read the posting. We only read public pages, never pages that need a login.</p>
+    <p>Screenshots are read in your browser using on-device OCR. The image is never uploaded.</p>
+  </div>
+  
+  <div class="privacy-item">
+    <div class="privacy-item-num">03</div>
+    <h3 class="privacy-item-title">Your history</h3>
+    <p>Saved analyses and roadmap progress live only in this browser, in local storage.</p>
+    <p>Delete them at any time using "Delete all local data" in History.</p>
+  </div>
+  
+  <div class="privacy-item">
+    <div class="privacy-item-num">04</div>
+    <h3 class="privacy-item-title">What we do store</h3>
+    <p>Only public data: our skill taxonomy and a cache of the free learning resources we recommend—tutorials, playlists and documentation.</p>
+  </div>
+</div>
+{% endblock %}

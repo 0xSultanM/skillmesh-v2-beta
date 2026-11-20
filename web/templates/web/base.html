@@ -1,0 +1,90 @@
+{% load static %}<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>{% block title %}SkillMesh{% endblock %}</title>
+  <meta name="description" content="Check how well your resume fits a job, and get a free learning roadmap for the gaps.">
+  <meta name="theme-color" content="#0d7377">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="SkillMesh">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230d7377'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' fill='white' font-family='system-ui' font-weight='800' font-size='18'>S</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230d7377'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' fill='white' font-family='system-ui' font-weight='800' font-size='18'>S</text></svg>">
+  <meta name="color-scheme" content="light dark">
+  <script src="{% static 'web/theme.js' %}"></script>
+  <script src="{% static 'web/mobile-menu.js' %}?v=1"></script>
+  <link rel="stylesheet" href="{% static 'web/app.css' %}?v=17">
+</head>
+<body>
+  <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">☰</button>
+  
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <div class="sidebar-logo">S</div>
+        <span class="sidebar-brand-text">SkillMesh</span>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <div class="sidebar-label">Career Workspace</div>
+        <a href="{% url 'index' %}" class="sidebar-item {% block nav_analyzer %}{% endblock %}">
+          <span class="sidebar-item-num">01</span>
+          <span>Analyzer</span>
+        </a>
+        <a href="{% url 'tutmesh' %}" class="sidebar-item {% block nav_tutmesh %}{% endblock %}">
+          <span class="sidebar-item-num">02</span>
+          <span>TutMesh</span>
+        </a>
+        <a href="{% url 'history' %}" class="sidebar-item {% block nav_history %}{% endblock %}">
+          <span class="sidebar-item-num">03</span>
+          <span>History</span>
+        </a>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <div class="sidebar-privacy-card">
+          <h4>Built around your privacy</h4>
+          <p>Nothing is stored on our servers. Your progress stays in this browser.</p>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <a href="{% url 'privacy' %}" class="sidebar-privacy-link">Privacy & data</a>
+          <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode">
+            <span class="ti-sun" aria-hidden="true">☀️</span><span class="ti-moon" aria-hidden="true">🌙</span>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <div class="main-content">
+      <!-- Top bar -->
+      <header class="topbar">
+        <div class="breadcrumb">
+          <a href="{% url 'index' %}">Workspace</a>
+          <span class="breadcrumb-sep">/</span>
+          <span class="breadcrumb-current">{% block breadcrumb_current %}Analyzer{% endblock %}</span>
+        </div>
+        <div class="topbar-badge">Private by Design</div>
+      </header>
+
+      <!-- Page content -->
+      <main class="page-content">
+        {% block content %}{% endblock %}
+      </main>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div>
+          <span class="footer-brand">SkillMesh</span> / Evidence, not guesswork
+        </div>
+        <div>Processed in memory. Saved only in this browser.</div>
+      </footer>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" hidden></div>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

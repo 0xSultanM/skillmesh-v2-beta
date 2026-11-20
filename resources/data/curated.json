@@ -1,0 +1,611 @@
+{
+  "_note": "Hand-vetted, free resources. Run `manage.py check_links` after editing. YouTube playlists are discovered via the API (refresh_resources) rather than hard-coded.",
+  "channels": [
+    {
+      "title": "freeCodeCamp.org",
+      "trust": "allow",
+      "note": "Long-form full courses"
+    },
+    {
+      "title": "CS50",
+      "trust": "allow",
+      "note": "Harvard CS50 lectures"
+    },
+    {
+      "title": "MIT OpenCourseWare",
+      "trust": "allow"
+    },
+    {
+      "title": "Stanford Online",
+      "trust": "allow"
+    },
+    {
+      "title": "Traversy Media",
+      "trust": "allow"
+    },
+    {
+      "title": "The Net Ninja",
+      "trust": "allow"
+    },
+    {
+      "title": "Corey Schafer",
+      "trust": "allow"
+    },
+    {
+      "title": "Programming with Mosh",
+      "trust": "allow"
+    },
+    {
+      "title": "TechWorld with Nana",
+      "trust": "allow"
+    },
+    {
+      "title": "Kevin Powell",
+      "trust": "allow"
+    },
+    {
+      "title": "Web Dev Simplified",
+      "trust": "allow"
+    },
+    {
+      "title": "StatQuest with Josh Starmer",
+      "trust": "allow"
+    },
+    {
+      "title": "3Blue1Brown",
+      "trust": "allow"
+    },
+    {
+      "title": "sentdex",
+      "trust": "allow"
+    },
+    {
+      "title": "Hussein Nasser",
+      "trust": "allow"
+    },
+    {
+      "title": "Fireship",
+      "trust": "allow",
+      "note": "Concise overviews"
+    },
+    {
+      "title": "Andrej Karpathy",
+      "trust": "allow"
+    },
+    {
+      "title": "Google for Developers",
+      "trust": "allow"
+    },
+    {
+      "title": "Microsoft Developer",
+      "trust": "allow"
+    },
+    {
+      "title": "Bro Code",
+      "trust": "allow"
+    },
+    {
+      "title": "Amigoscode",
+      "trust": "allow"
+    },
+    {
+      "title": "Dave Gray",
+      "trust": "allow"
+    },
+    {
+      "title": "Academind",
+      "trust": "allow"
+    },
+    {
+      "title": "Codevolution",
+      "trust": "allow"
+    },
+    {
+      "title": "Keith Galli",
+      "trust": "allow"
+    },
+    {
+      "title": "Alex The Analyst",
+      "trust": "allow"
+    },
+    {
+      "title": "ByteByteGo",
+      "trust": "allow"
+    },
+    {
+      "title": "Tech With Tim",
+      "trust": "allow"
+    },
+    {
+      "title": "NeetCode",
+      "trust": "allow"
+    },
+    {
+      "title": "KodeKloud",
+      "trust": "allow"
+    },
+    {
+      "title": "Krish Naik",
+      "trust": "allow"
+    },
+    {
+      "title": "Telusko",
+      "trust": "allow"
+    },
+    {
+      "title": "DevOps Directive",
+      "trust": "allow"
+    },
+    {
+      "title": "IBM Technology",
+      "trust": "allow"
+    },
+    {
+      "title": "Simplilearn",
+      "trust": "allow"
+    },
+    {
+      "title": "edureka!",
+      "trust": "allow"
+    },
+    {
+      "title": "Google Career Certificates",
+      "trust": "allow"
+    },
+    {
+      "title": "AWS Events",
+      "trust": "allow"
+    },
+    {
+      "title": "Microsoft Learn",
+      "trust": "allow"
+    },
+    {
+      "title": "Hitesh Choudhary",
+      "trust": "allow"
+    },
+    {
+      "title": "Jack Herrington",
+      "trust": "allow"
+    },
+    {
+      "title": "The Coding Train",
+      "trust": "allow"
+    },
+    {
+      "title": "Coding with Lewis",
+      "trust": "allow"
+    }
+  ],
+  "resources": {
+    "programming-fundamentals": [
+      {
+        "kind": "course",
+        "title": "CS50x: Introduction to Computer Science",
+        "url": "https://cs50.harvard.edu/x/",
+        "author": "Harvard",
+        "est_hours": 100,
+        "quality_score": 0.98,
+        "description": "Harvard's legendary intro to computer science: C, Python, SQL, algorithms, memory and web basics, taught through weekly lectures and graded problem sets. Free to audit with a certificate option."
+      }
+    ],
+    "data-structures-algorithms": [
+      {
+        "kind": "course",
+        "title": "MIT 6.006 Introduction to Algorithms",
+        "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/",
+        "author": "MIT OpenCourseWare",
+        "level": "intermediate",
+        "est_hours": 80,
+        "quality_score": 0.95,
+        "description": "MIT's core algorithms course with full lecture videos, notes and problem sets: sorting, hashing, graphs, shortest paths and dynamic programming."
+      }
+    ],
+    "python": [
+      {
+        "kind": "docs",
+        "title": "The Official Python Tutorial",
+        "url": "https://docs.python.org/3/tutorial/",
+        "author": "Python.org",
+        "est_hours": 15,
+        "quality_score": 0.95,
+        "description": "The official, always up-to-date Python tutorial. Covers syntax, data structures, modules, errors, classes and the standard library in a logical order."
+      },
+      {
+        "kind": "course",
+        "title": "CS50's Introduction to Programming with Python",
+        "url": "https://cs50.harvard.edu/python/",
+        "author": "Harvard",
+        "est_hours": 40,
+        "quality_score": 0.97,
+        "description": "A complete Python course from Harvard: functions, conditionals, loops, exceptions, libraries, unit tests, file I/O, regex and OOP, with hands-on problem sets and a final project."
+      },
+      {
+        "kind": "course",
+        "title": "Scientific Computing with Python",
+        "url": "https://www.freecodecamp.org/learn/scientific-computing-with-python/",
+        "author": "freeCodeCamp",
+        "est_hours": 30,
+        "quality_score": 0.9,
+        "description": "Interactive, project-based Python curriculum in the browser, ending in certification projects you can add to your portfolio."
+      }
+    ],
+    "html": [
+      {
+        "kind": "docs",
+        "title": "MDN: Learn web development",
+        "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development",
+        "author": "MDN",
+        "est_hours": 10,
+        "quality_score": 0.97,
+        "description": "MDN's structured learning area for HTML, CSS and JavaScript. Written by browser vendors and the community, with assessments after each module."
+      },
+      {
+        "kind": "course",
+        "title": "The Odin Project: Foundations",
+        "url": "https://www.theodinproject.com/paths/foundations/courses/foundations",
+        "author": "The Odin Project",
+        "est_hours": 40,
+        "quality_score": 0.93,
+        "description": "A free, open-source full-stack curriculum. The Foundations course sets up your dev environment and teaches Git, HTML, CSS and JavaScript through real projects."
+      }
+    ],
+    "css": [
+      {
+        "kind": "course",
+        "title": "Learn CSS",
+        "url": "https://web.dev/learn/css",
+        "author": "web.dev (Google)",
+        "est_hours": 15,
+        "quality_score": 0.95,
+        "description": "Google's in-depth CSS course: box model, selectors, cascade, layout (flexbox and grid), responsive design and modern features, with interactive demos."
+      },
+      {
+        "kind": "article",
+        "title": "A Complete Guide to Flexbox",
+        "url": "https://css-tricks.com/snippets/css/a-guide-to-flexbox/",
+        "author": "CSS-Tricks",
+        "est_hours": 1,
+        "quality_score": 0.88,
+        "description": "The classic visual reference for every flexbox property, with diagrams. Bookmark-worthy for daily work."
+      }
+    ],
+    "javascript": [
+      {
+        "kind": "docs",
+        "title": "The Modern JavaScript Tutorial",
+        "url": "https://javascript.info/",
+        "author": "javascript.info",
+        "est_hours": 40,
+        "quality_score": 0.96,
+        "description": "A modern, thorough JavaScript tutorial from basics to advanced topics (closures, prototypes, promises, async/await, modules), with tasks after each chapter."
+      },
+      {
+        "kind": "docs",
+        "title": "MDN JavaScript Guide",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide",
+        "author": "MDN",
+        "est_hours": 20,
+        "quality_score": 0.95,
+        "description": "MDN's official JavaScript guide covering grammar, control flow, functions, objects, classes, promises and modules. The reference professionals use."
+      }
+    ],
+    "typescript": [
+      {
+        "kind": "docs",
+        "title": "The TypeScript Handbook",
+        "url": "https://www.typescriptlang.org/docs/handbook/intro.html",
+        "author": "Microsoft",
+        "est_hours": 12,
+        "quality_score": 0.95,
+        "description": "The official TypeScript Handbook: everyday types, narrowing, generics, classes, modules and type manipulation, written by the TypeScript team."
+      }
+    ],
+    "react": [
+      {
+        "kind": "docs",
+        "title": "Learn React (official)",
+        "url": "https://react.dev/learn",
+        "author": "React team",
+        "est_hours": 20,
+        "quality_score": 0.97,
+        "description": "The official React course: components, props, state, effects, hooks and thinking in React, with interactive sandboxes and challenges."
+      }
+    ],
+    "nextjs": [
+      {
+        "kind": "course",
+        "title": "Learn Next.js (official course)",
+        "url": "https://nextjs.org/learn",
+        "author": "Vercel",
+        "est_hours": 15,
+        "quality_score": 0.95,
+        "description": "Vercel's official hands-on course. You build a full dashboard app covering routing, data fetching, server components, streaming, auth and deployment."
+      }
+    ],
+    "vue": [
+      {
+        "kind": "docs",
+        "title": "Vue.js Tutorial (official)",
+        "url": "https://vuejs.org/tutorial/",
+        "author": "Vue team",
+        "est_hours": 10,
+        "quality_score": 0.95,
+        "description": "Interactive, step-by-step official Vue tutorial covering reactivity, templates, components and the Composition API."
+      }
+    ],
+    "nodejs": [
+      {
+        "kind": "docs",
+        "title": "Learn Node.js (official)",
+        "url": "https://nodejs.org/en/learn",
+        "author": "OpenJS Foundation",
+        "est_hours": 15,
+        "quality_score": 0.93,
+        "description": "Official Node.js learning path: the event loop, modules, async programming, HTTP servers, files and the npm ecosystem."
+      }
+    ],
+    "django": [
+      {
+        "kind": "docs",
+        "title": "Writing your first Django app",
+        "url": "https://docs.djangoproject.com/en/stable/intro/tutorial01/",
+        "author": "Django",
+        "est_hours": 10,
+        "quality_score": 0.96,
+        "description": "The official 8-part Django tutorial: you build a polls app with models, views, templates, forms, tests, static files and the admin."
+      }
+    ],
+    "fastapi": [
+      {
+        "kind": "docs",
+        "title": "FastAPI Tutorial - User Guide",
+        "url": "https://fastapi.tiangolo.com/tutorial/",
+        "author": "FastAPI",
+        "est_hours": 10,
+        "quality_score": 0.95,
+        "description": "The official FastAPI user guide: path/query params, Pydantic models, dependency injection, security, databases and testing, with copy-paste examples."
+      }
+    ],
+    "go": [
+      {
+        "kind": "interactive",
+        "title": "A Tour of Go",
+        "url": "https://go.dev/tour/",
+        "author": "The Go Authors",
+        "est_hours": 8,
+        "quality_score": 0.96,
+        "description": "The official interactive Go tour, running in the browser: basics, methods, interfaces, generics and concurrency with goroutines and channels."
+      }
+    ],
+    "rust": [
+      {
+        "kind": "docs",
+        "title": "The Rust Programming Language (the Book)",
+        "url": "https://doc.rust-lang.org/book/",
+        "author": "Rust project",
+        "est_hours": 40,
+        "quality_score": 0.97,
+        "description": "'The Book': the official Rust guide covering ownership, borrowing, lifetimes, traits, error handling, concurrency, plus three hands-on projects."
+      }
+    ],
+    "java": [
+      {
+        "kind": "docs",
+        "title": "Learn Java (dev.java)",
+        "url": "https://dev.java/learn/",
+        "author": "Oracle",
+        "est_hours": 30,
+        "quality_score": 0.93,
+        "description": "Oracle's official Java learning portal: the language, OOP, collections, generics, lambdas, streams and modern Java features."
+      }
+    ],
+    "csharp": [
+      {
+        "kind": "course",
+        "title": "Learn C# (Microsoft Learn)",
+        "url": "https://learn.microsoft.com/en-us/dotnet/csharp/",
+        "author": "Microsoft",
+        "est_hours": 25,
+        "quality_score": 0.92,
+        "description": "Microsoft's official C# documentation and tutorials, from first program to LINQ, async and modern language features."
+      }
+    ],
+    "sql": [
+      {
+        "kind": "interactive",
+        "title": "SQLBolt: Interactive SQL lessons",
+        "url": "https://sqlbolt.com/",
+        "author": "SQLBolt",
+        "est_hours": 5,
+        "quality_score": 0.9,
+        "description": "Short interactive SQL lessons with exercises right in the browser: SELECT, filtering, joins, aggregates, and creating and altering tables."
+      },
+      {
+        "kind": "docs",
+        "title": "PostgreSQL Tutorial (official)",
+        "url": "https://www.postgresql.org/docs/current/tutorial.html",
+        "author": "PostgreSQL",
+        "est_hours": 6,
+        "quality_score": 0.9,
+        "description": "The official PostgreSQL tutorial: creating databases and tables, querying, joins, aggregates, views, foreign keys, transactions and window functions."
+      }
+    ],
+    "postgresql": [
+      {
+        "kind": "docs",
+        "title": "PostgreSQL Tutorial (official)",
+        "url": "https://www.postgresql.org/docs/current/tutorial.html",
+        "author": "PostgreSQL",
+        "est_hours": 6,
+        "quality_score": 0.92,
+        "description": "The official PostgreSQL tutorial: creating databases and tables, querying, joins, aggregates, views, foreign keys, transactions and window functions."
+      }
+    ],
+    "git": [
+      {
+        "kind": "docs",
+        "title": "Pro Git (free book)",
+        "url": "https://git-scm.com/book/en/v2",
+        "author": "Scott Chacon & Ben Straub",
+        "est_hours": 10,
+        "quality_score": 0.95,
+        "description": "Pro Git, the official free book on Git: basics, branching, remotes, GitHub workflows, rewriting history and Git internals."
+      },
+      {
+        "kind": "interactive",
+        "title": "Learn Git Branching",
+        "url": "https://learngitbranching.js.org/",
+        "author": "Peter Cottle",
+        "est_hours": 3,
+        "quality_score": 0.9,
+        "description": "A visual, game-like sandbox for mastering branching, merging, rebasing and remote workflows."
+      }
+    ],
+    "linux": [
+      {
+        "kind": "interactive",
+        "title": "Linux Journey",
+        "url": "https://linuxjourney.com/",
+        "author": "Linux Journey",
+        "est_hours": 15,
+        "quality_score": 0.88,
+        "description": "A friendly, self-paced path through the Linux command line, filesystem, permissions, processes, packages and networking, with quizzes."
+      }
+    ],
+    "docker": [
+      {
+        "kind": "docs",
+        "title": "Docker: Get started",
+        "url": "https://docs.docker.com/get-started/",
+        "author": "Docker",
+        "est_hours": 6,
+        "quality_score": 0.94,
+        "description": "Docker's official getting-started guide: images, containers, Dockerfiles, volumes, networking and Compose for multi-container apps."
+      }
+    ],
+    "kubernetes": [
+      {
+        "kind": "interactive",
+        "title": "Kubernetes Basics (official tutorial)",
+        "url": "https://kubernetes.io/docs/tutorials/kubernetes-basics/",
+        "author": "Kubernetes",
+        "est_hours": 6,
+        "quality_score": 0.94,
+        "description": "The official interactive Kubernetes tutorial: create a cluster, deploy an app, explore it, expose it, scale it and roll out updates."
+      }
+    ],
+    "machine-learning": [
+      {
+        "kind": "course",
+        "title": "Google Machine Learning Crash Course",
+        "url": "https://developers.google.com/machine-learning/crash-course",
+        "author": "Google",
+        "est_hours": 15,
+        "quality_score": 0.95,
+        "description": "Google's fast-paced ML course with videos, interactive visualisations and exercises: regression, classification, data prep, neural nets and fairness."
+      },
+      {
+        "kind": "docs",
+        "title": "scikit-learn User Guide",
+        "url": "https://scikit-learn.org/stable/user_guide.html",
+        "author": "scikit-learn",
+        "level": "intermediate",
+        "est_hours": 20,
+        "quality_score": 0.9,
+        "description": "The definitive guide to classical ML in Python: supervised and unsupervised models, model selection, preprocessing and pipelines."
+      }
+    ],
+    "deep-learning": [
+      {
+        "kind": "course",
+        "title": "Practical Deep Learning for Coders",
+        "url": "https://course.fast.ai/",
+        "author": "fast.ai",
+        "level": "intermediate",
+        "est_hours": 40,
+        "quality_score": 0.96,
+        "description": "A top-down, code-first deep learning course. Train state-of-the-art vision and NLP models from lesson one, then learn the theory underneath."
+      }
+    ],
+    "nlp": [
+      {
+        "kind": "course",
+        "title": "Hugging Face LLM Course",
+        "url": "https://huggingface.co/learn/llm-course",
+        "author": "Hugging Face",
+        "level": "intermediate",
+        "est_hours": 25,
+        "quality_score": 0.93,
+        "description": "Hugging Face's course on transformers and LLMs: tokenizers, fine-tuning, datasets, sharing models and building NLP pipelines."
+      }
+    ],
+    "pandas": [
+      {
+        "kind": "docs",
+        "title": "pandas: Getting started tutorials",
+        "url": "https://pandas.pydata.org/docs/getting_started/intro_tutorials/index.html",
+        "author": "pandas",
+        "est_hours": 6,
+        "quality_score": 0.92,
+        "description": "Official pandas tutorials: reading data, selecting and filtering, plotting, reshaping, combining tables, time series and text data."
+      }
+    ],
+    "statistics": [
+      {
+        "kind": "course",
+        "title": "Khan Academy: Statistics and probability",
+        "url": "https://www.khanacademy.org/math/statistics-probability",
+        "author": "Khan Academy",
+        "est_hours": 40,
+        "quality_score": 0.93,
+        "description": "A complete statistics and probability course with videos and practice: distributions, sampling, inference, hypothesis testing and regression."
+      }
+    ],
+    "web-accessibility": [
+      {
+        "kind": "course",
+        "title": "Learn Accessibility",
+        "url": "https://web.dev/learn/accessibility",
+        "author": "web.dev (Google)",
+        "est_hours": 8,
+        "quality_score": 0.93,
+        "description": "Google's accessibility course: semantic HTML, ARIA, focus, keyboard navigation, colour contrast, testing and WCAG fundamentals."
+      }
+    ],
+    "web-security": [
+      {
+        "kind": "docs",
+        "title": "OWASP Top Ten",
+        "url": "https://owasp.org/www-project-top-ten/",
+        "author": "OWASP",
+        "est_hours": 6,
+        "quality_score": 0.94,
+        "description": "The industry-standard list of the ten most critical web application security risks, with descriptions, examples and prevention guidance."
+      }
+    ],
+    "rest-api": [
+      {
+        "kind": "docs",
+        "title": "MDN: An overview of HTTP",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview",
+        "author": "MDN",
+        "est_hours": 3,
+        "quality_score": 0.9,
+        "description": "MDN's clear explanation of how HTTP works: requests, responses, methods, status codes, headers and statelessness. The foundation of REST APIs."
+      }
+    ],
+    "system-design": [
+      {
+        "kind": "docs",
+        "title": "The System Design Primer",
+        "url": "https://github.com/donnemartin/system-design-primer",
+        "author": "Donne Martin",
+        "level": "intermediate",
+        "est_hours": 30,
+        "quality_score": 0.92,
+        "description": "The most popular open resource for learning system design: scalability concepts, trade-offs, caching, databases and worked interview examples."
+      }
+    ]
+  }
+}

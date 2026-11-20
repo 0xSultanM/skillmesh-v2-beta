@@ -1,0 +1,238 @@
+{% extends "web/base.html" %}
+{% load static %}
+
+{% block title %}SkillMesh - Analyzer{% endblock %}
+{% block breadcrumb_current %}Analyzer{% endblock %}
+{% block nav_analyzer %}active{% endblock %}
+{% block nav_tutmesh %}{% endblock %}
+{% block nav_history %}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="page-eyebrow">Analyzer</div>
+  <h1 class="page-title">Are you ready for this job?</h1>
+  <p class="page-subtitle">Turn your experience into a clear next step.</p>
+</div>
+
+<!-- Step indicator -->
+<div class="step-indicator">
+  <div class="step-item active" data-step="1">
+    <span class="step-num">01</span>
+    <span>Your profile</span>
+  </div>
+  <div class="step-line"></div>
+  <div class="step-item" data-step="2">
+    <span class="step-num">02</span>
+    <span>The job</span>
+  </div>
+  <div class="step-line"></div>
+  <div class="step-item" data-step="3">
+    <span class="step-num">03</span>
+    <span>Your results</span>
+  </div>
+  <div class="step-status" id="capabilities"></div>
+</div>
+
+<!-- Main grid: Profile + Job -->
+<div class="grid-2">
+  <!-- Profile card -->
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">Your profile</h2>
+      <p class="card-subtitle">The skills and experience you bring.</p>
+    </div>
+    
+    <!-- Profile tabs -->
+    <div class="seg" role="tablist" aria-label="Profile source">
+      <button role="tab" aria-selected="true" data-profile-mode="resume">Resume</button>
+      <button role="tab" aria-selected="false" data-profile-mode="github">GitHub</button>
+    </div>
+    
+    <!-- Resume panel -->
+    <div data-profile-panel="resume" style="margin-top: 20px;">
+      <label class="dropzone" id="resumeDrop" tabindex="0">
+        <input type="file" id="resumeFile" accept=".pdf,.docx,.txt,.md" hidden>
+        <div class="dropzone-icon">↑</div>
+        <strong>Drop your resume here</strong>
+        <span>PDF, DOCX or TXT · Up to 5 MB</span>
+        <span class="filename" id="resumeFileName"></span>
+      </label>
+      <div style="text-align: center; margin-top: 16px;">
+        <button class="btn" id="browseResumeBtn">Browse files</button>
+      </div>
+      <p class="auto-status" id="resumeStatus" role="status" aria-live="polite" hidden></p>
+      
+      <div id="profileBox" class="extracted" hidden>
+        <div class="extracted-head">
+          <h3>What we found</h3>
+          <span class="badge" id="profileSource"></span>
+        </div>
+        <div class="fields">
+          <label>Years of experience <input type="number" id="pYears" min="0" max="50"></label>
+          <label>Level
+            <select id="pSeniority">
+              <option value="unknown">Unknown</option><option value="intern">Intern</option><option value="junior">Junior</option>
+              <option value="mid">Mid</option><option value="senior">Senior</option><option value="lead">Lead / Principal</option>
+            </select>
+          </label>
+          <label>Highest degree
+            <select id="pEducation">
+              <option value="">None / not stated</option><option value="associate">Associate / Diploma</option>
+              <option value="bachelor">Bachelor's</option><option value="master">Master's</option><option value="phd">PhD</option>
+            </select>
+          </label>
+        </div>
+        <p class="hint">Click a skill to switch it between <span class="chip applied mini">used in work</span> and <span class="chip listed mini">only listed</span>. Remove anything that's wrong.</p>
+        <div class="chips" id="profileChips"></div>
+        <form class="add-chip" data-target="profile">
+          <input type="text" placeholder="Add a skill you have…" aria-label="Add a skill you have" maxlength="80">
+          <button class="btn small" type="submit">Add</button>
+        </form>
+      </div>
+    </div>
+    
+    <!-- GitHub panel -->
+    <div class="github-block" data-profile-panel="github" hidden>
+      <h3 style="font-size: 1.15rem; font-weight: 700; margin: 0 0 8px;">Your public work, in context.</h3>
+      <p class="hint" style="margin: 0 0 20px; font-size: 0.95rem;">We read languages, dependencies and tooling from public repositories—not your bio.</p>
+      
+      <div class="gh-auth-card" id="ghAuth" aria-live="polite" style="margin-bottom: 20px;"></div>
+      
+      <form id="githubForm" class="gh-input-row" style="margin-bottom: 12px;">
+        <input type="text" id="githubUser" placeholder="github.com/your-username" aria-label="GitHub username or profile URL" maxlength="120" autocomplete="off">
+        <button class="btn primary" type="submit" id="githubBtn">Analyze GitHub</button>
+      </form>
+      
+      <p style="margin: 12px 0; font-size: 0.9rem; color: var(--muted);">
+        or <a href="/auth/github/login/" class="gh-signin-link">Sign in with GitHub ↗</a>
+      </p>
+      
+      <div id="githubBox" hidden style="margin-top: 20px;">
+        <div class="gh-summary" id="ghSummary"></div>
+        <div class="lang-bar" id="ghLangBar" aria-label="Languages by code volume"></div>
+        <div class="lang-legend" id="ghLangLegend"></div>
+        <p class="hint">Skills evidenced in your code. The number is the estimated level from repo count, code volume and recency.</p>
+        <div class="chips" id="githubChips"></div>
+        <button class="btn danger" id="githubClear" type="button" style="margin-top: 12px; width: 100%;">Remove GitHub data</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Job card -->
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">The job</h2>
+      <p class="card-subtitle">The opportunity you're working toward.</p>
+    </div>
+    
+    <!-- Job tabs -->
+    <div class="seg" role="tablist" aria-label="Job input method">
+      <button role="tab" aria-selected="true" data-job-mode="url">Job URL</button>
+      <button role="tab" aria-selected="false" data-job-mode="paste">Paste text</button>
+      <button role="tab" aria-selected="false" data-job-mode="screenshot">Screenshot</button>
+    </div>
+    
+    <!-- URL panel -->
+    <div data-job-panel="url" style="margin-top: 20px;">
+      <form class="inline-form" id="jobUrlForm">
+        <input type="url" id="jobUrl" placeholder="https://company.com/careers/job-123" style="flex: 1;">
+        <button class="btn" type="submit" id="fetchJobBtn">Fetch</button>
+      </form>
+      <p class="hint">Public pages only. For pages behind a login, paste the text or add a screenshot instead.</p>
+      <textarea id="jobText" placeholder="Your job description will appear here...&#10;&#10;You can also paste or edit the text." style="margin-top: 12px; min-height: 140px;"></textarea>
+      
+      <div id="jobSkillsBox" hidden style="margin-top: 20px;">
+        <h4 style="font-size: 0.9rem; font-weight: 700; margin: 0 0 8px; color: var(--text);">Required Skills</h4>
+        <div class="chips" id="requiredSkills"></div>
+        
+        <h4 style="font-size: 0.9rem; font-weight: 700; margin: 16px 0 8px; color: var(--text);">Nice-to-Have</h4>
+        <div class="chips" id="preferredSkills"></div>
+      </div>
+    </div>
+    
+    <!-- Paste panel -->
+    <div data-job-panel="paste" hidden style="margin-top: 20px;">
+      <textarea id="jobTextPaste" placeholder="Paste the job description here...&#10;&#10;Requirements are extracted automatically." style="min-height: 200px;"></textarea>
+      <p class="hint">We'll find required skills, experience and nice-to-haves.</p>
+      
+      <div id="jobSkillsBoxPaste" hidden style="margin-top: 20px;">
+        <h4 style="font-size: 0.9rem; font-weight: 700; margin: 0 0 8px; color: var(--text);">Required Skills</h4>
+        <div class="chips" id="requiredSkillsPaste"></div>
+        
+        <h4 style="font-size: 0.9rem; font-weight: 700; margin: 16px 0 8px; color: var(--text);">Nice-to-Have</h4>
+        <div class="chips" id="preferredSkillsPaste"></div>
+      </div>
+    </div>
+    
+    <!-- Screenshot panel -->
+    <div data-job-panel="screenshot" hidden style="margin-top: 20px;">
+      <label class="dropzone" id="screenshotDrop" tabindex="0">
+        <input type="file" id="screenshotFile" accept="image/*" hidden>
+        <div class="dropzone-icon">↑</div>
+        <strong>Drop a screenshot</strong>
+        <span>or press Ctrl+V to paste one</span>
+      </label>
+      <textarea id="jobTextScreenshot" placeholder="Extracted job description will appear here..." style="margin-top: 12px; min-height: 120px;" hidden></textarea>
+      <p class="hint" id="screenshotHint">✓ On-device OCR. Your image is never uploaded.</p>
+      
+      <div id="jobSkillsBoxScreenshot" hidden style="margin-top: 20px;">
+        <h4 style="font-size: 0.9rem; font-weight: 700; margin: 0 0 8px; color: var(--text);">Required Skills</h4>
+        <div class="chips" id="requiredSkillsScreenshot"></div>
+        
+        <h4 style="font-size: 0.9rem; font-weight: 700; margin: 16px 0 8px; color: var(--text);">Nice-to-Have</h4>
+        <div class="chips" id="preferredSkillsScreenshot"></div>
+      </div>
+    </div>
+    
+    <p class="auto-status" id="jobStatus" role="status" aria-live="polite" hidden></p>
+  </div>
+</div>
+
+<!-- Analysis bar -->
+<div class="analyze-bar">
+  <div class="study-control">
+    <div>
+      <div style="font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px;">Make it work for you</div>
+      <div class="study-value">
+        <b id="hoursValue">10</b>
+        <span>hours / week</span>
+      </div>
+    </div>
+    <div class="study-slider">
+      <input type="range" id="hoursSlider" class="range-slider" min="2" max="40" value="10" step="1">
+      <div class="study-pace" id="studyPace">Steady · about 1.4 h a day</div>
+      <div class="study-scale">
+        <span>2 h</span>
+        <span>40 h</span>
+      </div>
+    </div>
+  </div>
+  
+  <label class="switch">
+    <input type="checkbox" id="includePreferred" checked>
+    <div class="switch-track">
+      <div class="switch-thumb"></div>
+    </div>
+    <div class="switch-text">
+      <b>Nice-to-haves</b>
+      <small>Include in roadmap</small>
+    </div>
+  </label>
+  
+  <div class="analyze-cta">
+    <button class="btn primary large" id="analyzeBtn" disabled>Analyze my fit →</button>
+  </div>
+</div>
+
+<!-- Trust badges -->
+<div class="trust-badges">
+  <div class="trust-badge">Evidence-based matching</div>
+  <div class="trust-badge">Curated, free learning resources</div>
+  <div class="trust-badge">Nothing stored on our servers</div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'web/common.js' %}?v=16"></script>
+<script src="{% static 'web/app.js' %}?v=16"></script>
+{% endblock %}

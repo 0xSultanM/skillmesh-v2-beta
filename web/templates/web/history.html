@@ -1,0 +1,64 @@
+{% extends "web/base.html" %}
+{% load static %}
+
+{% block title %}SkillMesh - History{% endblock %}
+{% block breadcrumb_current %}History{% endblock %}
+{% block nav_history %}active{% endblock %}
+{% block nav_analyzer %}{% endblock %}
+{% block nav_tutmesh %}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="page-eyebrow">History</div>
+  <h1 class="page-title">Your analysis, saved locally</h1>
+  <p class="page-subtitle">Pick up where you left off. Only in this browser.</p>
+</div>
+
+<div class="callout success">
+  <div class="callout-title">✓ Saved in this browser, never on our servers.</div>
+  <p>Your analyses and roadmap progress stay on this device.</p>
+</div>
+
+<div class="card">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <h2 style="font-size: 1.25rem; font-weight: 700; margin: 0;">Saved analyses</h2>
+    <span class="badge" id="historyCount">0 analyses</span>
+  </div>
+  
+  <div id="historyEmpty" class="empty-state">
+    <div class="empty-icon">↺</div>
+    <h3 class="empty-title">A fresh start.</h3>
+    <p class="empty-message">You haven't saved an analysis yet.<br>Analyze a job, then save your report to come back to it.</p>
+    <a href="{% url 'index' %}" class="btn primary large">Analyze a job →</a>
+  </div>
+  
+  <div id="historyList" hidden>
+    <table class="history-table">
+      <thead>
+        <tr>
+          <th>OPPORTUNITY</th>
+          <th>FIT SCORE</th>
+          <th>SAVED</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="historyTableBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card" style="margin-top: 24px;">
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <div>
+      <h3 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 4px;">You're in control</h3>
+      <p style="font-size: 0.9rem; color: var(--muted); margin: 0;">Remove saved reports and roadmap progress from this browser.</p>
+    </div>
+    <button class="btn" id="wipeDataBtn">Delete all local data</button>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'web/common.js' %}?v=15"></script>
+<script src="{% static 'web/history.js' %}?v=1"></script>
+{% endblock %}

@@ -1,0 +1,243 @@
+{% extends "web/base.html" %}
+{% load static %}
+
+{% block title %}SkillMesh - TutMesh{% endblock %}
+{% block breadcrumb_current %}TutMesh{% endblock %}
+{% block nav_tutmesh %}active{% endblock %}
+{% block nav_analyzer %}{% endblock %}
+{% block nav_history %}{% endblock %}
+
+{% block content %}
+<div class="tutmesh-header">
+  <div>
+    <div class="page-eyebrow">TutMesh</div>
+    <h1 class="tutmesh-title">Keep your momentum</h1>
+    <p class="tutmesh-subtitle">Your learning activity and today's streak goal, in one place.</p>
+  </div>
+</div>
+
+<!-- Empty state (shown when no roadmaps) -->
+<div id="tmEmpty" class="card" style="text-align: center; padding: 60px 20px;">
+  <div class="empty-icon">↗</div>
+  <h2 class="empty-title">Your next chapter starts here.</h2>
+  <p class="empty-message">Import a roadmap exported from SkillMesh,<br>or open your analysis in TutMesh to get started.</p>
+  
+  <label class="dropzone" id="importDrop" tabindex="0" style="max-width: 400px; margin: 0 auto 20px;">
+    <input type="file" id="importFile" accept=".json" hidden>
+    <strong>Import roadmap (.json)</strong>
+    <span>Drop a file here or click to browse</span>
+  </label>
+  
+  <a href="{% url 'index' %}" class="btn primary large">Go to analyzer →</a>
+</div>
+
+<!-- Main content (shown when roadmaps exist) -->
+<div id="tmMain" hidden>
+  <!-- Roadmap selector card -->
+  <div class="card" style="margin-bottom: 24px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+      <div>
+        <div style="font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px;">Your Roadmap</div>
+        <h2 id="tmTitle" style="font-size: 1.25rem; font-weight: 700; margin: 0;">Software Engineer – Frontend (Contract)</h2>
+        <p id="tmSubtitle" style="font-size: 0.9rem; color: var(--muted); margin: 4px 0 0;">4 steps · 0% complete</p>
+      </div>
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <button class="btn primary" id="exportJsonProgressBtn">Export With Progress</button>
+        <div style="position: relative;">
+          <button class="btn" id="switchRoadmapBtn">Switch roadmap ▾</button>
+          <div id="roadmapDropdown" class="roadmap-dropdown" hidden></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Streak goals -->
+  <div class="streak-card">
+    <div class="streak-header">
+      <div>
+        <h2 class="streak-title">Today's streak goal</h2>
+        <p class="streak-subtitle" id="streakSubtitle">Watch 30 minutes or read 15 minutes to earn a streak day.</p>
+      </div>
+      <button class="btn" id="editGoalBtn">Edit goal</button>
+    </div>
+    
+    <div id="goalDisplay">
+      <div class="streak-goals">
+        <div class="streak-goal">
+          <div class="streak-goal-label">Watch <span id="watchTime">0:00</span> / <span id="watchGoal">30:00</span></div>
+          <div class="streak-goal-bar"><div id="watchBar" style="width: 0%"></div></div>
+        </div>
+        <div class="streak-goal">
+          <div class="streak-goal-label">Read <span id="readTime">0:00</span> / <span id="readGoal">15:00</span></div>
+          <div class="streak-goal-bar"><div id="readBar" style="width: 0%"></div></div>
+        </div>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--muted); margin-top: 16px;">Time only counts while you're active in a video player or reader.</p>
+    </div>
+    
+    <div id="goalEdit" hidden>
+      <p style="font-size: 0.95rem; color: var(--text-secondary); margin: 0 0 20px;">Set a daily goal that fits your schedule. You can adjust it anytime.</p>
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-bottom: 24px;">
+        <div>
+          <label style="font-size: 0.9rem; color: var(--text); font-weight: 600; display: block; margin-bottom: 8px;">Watch (minutes)</label>
+          <input type="number" id="watchGoalInput" value="30" min="1" max="240">
+        </div>
+        <div>
+          <label style="font-size: 0.9rem; color: var(--text); font-weight: 600; display: block; margin-bottom: 8px;">Read (minutes)</label>
+          <input type="number" id="readGoalInput" value="15" min="1" max="240">
+        </div>
+      </div>
+      <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+        <button class="btn primary" id="saveGoalBtn">Save goal</button>
+        <button class="btn" id="cancelGoalBtn">Cancel</button>
+        <button class="btn" id="resetGoalBtn" style="margin-left: auto;">Reset to 10 / 5 min</button>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--muted); margin-top: 16px;">Time is tracked automatically while you study. You can edit the goal, not the elapsed time.</p>
+    </div>
+  </div>
+
+  <!-- Study activity with metrics -->
+  <div class="card" style="margin-bottom: 32px;">
+    <h2 style="font-size: 1.25rem; font-weight: 700; margin: 0 0 4px;">Study activity</h2>
+    <p style="font-size: 0.9rem; color: var(--muted); margin: 0 0 24px;">Past 12 months · minutes watched + read</p>
+    
+    <!-- 3 metric cards in a row -->
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px;">
+      <div class="metric-card">
+        <div class="metric-label">Day Streak</div>
+        <div class="metric-value" id="dayStreak">0</div>
+        <div class="metric-sub" id="dayStreakSub">Best: 0 day</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Total Tracked</div>
+        <div class="metric-value" id="totalTracked">0 min</div>
+        <div class="metric-sub" id="totalTrackedSub">0 watched · 0 read</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Weekly Streak</div>
+        <div class="metric-value" id="weeklyStreak">0</div>
+        <div class="metric-sub" id="weeklyStreakSub">0 of 7 days this week</div>
+      </div>
+    </div>
+    
+    <!-- Heatmap -->
+    <div class="heatmap" id="heatmap"></div>
+    <div class="heatmap-legend">
+      <span>Less</span>
+      <div class="heatmap-legend-cell" style="background: var(--surface-2);"></div>
+      <div class="heatmap-legend-cell l1"></div>
+      <div class="heatmap-legend-cell l2"></div>
+      <div class="heatmap-legend-cell l3"></div>
+      <div class="heatmap-legend-cell l4"></div>
+      <span>More</span>
+    </div>
+  </div>
+
+  <!-- Second roadmap card for export/remove -->
+  <div class="card" style="margin-bottom: 24px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+      <div>
+        <div style="font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px;">Your Roadmap</div>
+        <h2 id="tmTitle2" style="font-size: 1.25rem; font-weight: 700; margin: 0;">Software Engineer – Frontend (Contract)</h2>
+        <p id="tmSubtitle2" style="font-size: 0.9rem; color: var(--muted); margin: 4px 0 0;">Fit score at export: 57/100 · Stretch</p>
+      </div>
+      <div style="display: flex; gap: 12px;">
+        <button class="btn primary" id="exportPdfBtn">Export PDF</button>
+        <button class="btn danger" id="removeRoadmapBtn">Remove</button>
+      </div>
+    </div>
+    <div class="progress" style="margin-top: 16px;">
+      <div id="tmProgress" style="width: 0%"></div>
+    </div>
+    <div style="text-align: right; font-size: 0.85rem; color: var(--muted); margin-top: 4px;">
+      <span id="tmProgressText">0% complete · 0 of 4 steps</span>
+    </div>
+  </div>
+
+  <!-- Learning steps -->
+  <div style="margin-bottom: 24px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 12px;">
+      <h2 style="font-size: 1.25rem; font-weight: 700; margin: 0;">Your learning steps</h2>
+      <div style="display: flex; gap: 8px; align-items: center;">
+        <button class="btn small diff-toggle diff-easy" aria-pressed="true">Easy · <b id="easyCount">0</b></button>
+        <button class="btn small diff-toggle diff-medium" aria-pressed="true">Medium · <b id="mediumCount">0</b></button>
+        <button class="btn small diff-toggle diff-hard" aria-pressed="true">Hard · <b id="hardCount">0</b></button>
+        <label class="switch compact" style="margin-left: 12px;">
+          <input type="checkbox" id="hideCompleted">
+          <div class="switch-track"><div class="switch-thumb"></div></div>
+          <div class="switch-text"><b>Hide completed</b></div>
+        </label>
+      </div>
+    </div>
+    
+    <div id="tmSteps"></div>
+  </div>
+</div>
+
+<!-- Video player modal -->
+<div id="videoModal" class="modal-backdrop" hidden>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title" id="videoTitle">Video Title</h3>
+      <button class="modal-close" id="closeVideoModal">×</button>
+    </div>
+    <div class="modal-body">
+      <div id="videoMount" style="aspect-ratio: 16/9; background: #000;"></div>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 16px;">
+        <span id="videoStatus" style="font-size: 0.9rem; color: var(--muted);">Paused · Time counts while the video is playing</span>
+        <a href="#" id="videoExternal" target="_blank" rel="noopener" style="font-size: 0.9rem; color: var(--primary);">Open on YouTube ↗</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Content reader modal -->
+<div id="contentModal" class="modal-backdrop" hidden>
+  <div class="modal-content" style="max-width: 1100px;">
+    <div class="modal-header">
+      <div>
+        <div style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--primary); margin-bottom: 4px;" id="contentSource">Source</div>
+        <h3 class="modal-title" id="contentTitle">Article Title</h3>
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <button class="btn" id="readerViewBtn">Reader view</button>
+        <a href="#" id="contentExternal" target="_blank" rel="noopener" class="btn">Open original ↗</a>
+        <button class="modal-close" id="closeContentModal">×</button>
+      </div>
+    </div>
+    <div class="modal-body" style="padding: 0;">
+      <div class="reader-layout">
+        <div class="reader-toc" id="readerToc" hidden>
+          <div class="reader-toc-title">Table of Contents</div>
+          <ul class="reader-toc-list" id="readerTocList"></ul>
+        </div>
+        <div class="reader-content" id="readerContent"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Remove confirmation modal -->
+<div id="removeModal" class="modal-backdrop" hidden>
+  <div class="modal-content" style="max-width: 500px;">
+    <div class="modal-header">
+      <h3 class="modal-title">Remove roadmap?</h3>
+      <button class="modal-close" id="closeRemoveModal">×</button>
+    </div>
+    <div class="modal-body">
+      <p style="margin-bottom: 20px;">This will permanently delete this roadmap and all progress from your browser.</p>
+      <div style="display: flex; gap: 12px; justify-content: flex-end;">
+        <button class="btn" id="cancelRemoveBtn">Cancel</button>
+        <button class="btn primary" id="exportBeforeRemoveBtn">Export with progress</button>
+        <button class="btn danger" id="confirmRemoveBtn">Remove</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'web/common.js' %}?v=15"></script>
+<script src="{% static 'web/media.js' %}?v=15"></script>
+<script src="{% static 'web/tutmesh.js' %}?v=15"></script>
+{% endblock %}
