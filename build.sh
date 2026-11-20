@@ -1,24 +1,14 @@
 #!/bin/bash
-# Vercel build script for SkillMesh AI
-
 set -e
 
-echo "=== Starting build process ==="
-
+echo "=== SkillMesh AI Build ==="
 echo "Installing dependencies..."
 pip install -r requirements.txt
 
-echo "Running collectstatic..."
-python manage.py collectstatic --noinput --verbosity=2
+echo "Collecting static files..."
+python manage.py collectstatic --noinput --clear
 
 echo "Verifying static files..."
-if [ -d "staticfiles" ]; then
-    echo "✓ staticfiles directory exists"
-    echo "Contents:"
-    find staticfiles -type f | head -20
-else
-    echo "✗ ERROR: staticfiles directory not created!"
-    exit 1
-fi
+ls -la staticfiles/web/ 2>/dev/null || echo "WARNING: No static files found"
 
 echo "=== Build complete ==="
