@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     "resources",
     "analyzer",
     "web",
-    "docs",
 ]
 
 MIDDLEWARE = [
@@ -55,7 +54,6 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "web.middleware.PrivacyHeadersMiddleware",
-    "docs.middleware.DocsAccessMiddleware",
 ]
 
 ROOT_URLCONF = "skillmesh.urls"
