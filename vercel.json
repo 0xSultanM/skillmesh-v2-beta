@@ -1,28 +1,28 @@
 {
   "version": 2,
+  "buildCommand": "bash build.sh",
   "builds": [
     {
       "src": "skillmesh/wsgi.py",
       "use": "@vercel/python",
-      "config": { "maxLambdaSize": "15mb", "runtime": "python3.11" }
+      "config": {
+        "maxLambdaSize": "15mb",
+        "runtime": "python3.11"
+      }
     },
     {
-      "src": "web/static/**",
+      "src": "staticfiles/**",
       "use": "@vercel/static"
     }
   ],
   "routes": [
     {
       "src": "/static/(.*)",
-      "dest": "/static/$1"
+      "dest": "/staticfiles/$1"
     },
     {
       "src": "/(.*)",
       "dest": "skillmesh/wsgi.py"
     }
-  ],
-  "env": {
-    "DJANGO_SETTINGS_MODULE": "skillmesh.settings",
-    "PYTHONPATH": "."
-  }
+  ]
 }
