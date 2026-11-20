@@ -3,16 +3,16 @@
   "buildCommand": "bash build.sh",
   "builds": [
     {
+      "src": "staticfiles/**/*",
+      "use": "@vercel/static"
+    },
+    {
       "src": "skillmesh/wsgi.py",
       "use": "@vercel/python",
       "config": {
         "maxLambdaSize": "15mb",
         "runtime": "python3.11"
       }
-    },
-    {
-      "src": "staticfiles/**",
-      "use": "@vercel/static"
     }
   ],
   "routes": [

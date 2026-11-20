@@ -60,3 +60,4 @@ htmlcov/
 
 # Vercel
 .vercel
+.env*
