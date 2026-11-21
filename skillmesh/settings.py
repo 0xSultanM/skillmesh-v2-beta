@@ -81,13 +81,18 @@ WSGI_APPLICATION = "skillmesh.wsgi.application"
 # Set DATABASE_URL in Vercel environment variables:
 #   postgresql://USER:PASSWORD@HOST:PORT/DBNAME
 # Free options: Supabase, Neon, Railway, Aiven
+
 DATABASES = {
     "default": dj_database_url.config(
         default=os.getenv("DATABASE_URL", ""),
-        conn_max_age=600,
+        conn_max_age=0,
         ssl_require=not DEBUG,
     )
 }
+DATABASES["default"]["DISABLE_SERVER_SIDE_CURSORS"] = True
+DATABASES["default"].setdefault("OPTIONS", {})["options"] = "-c statement_timeout=30000"
+
+
 
 CACHES = {"default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}}
 
@@ -107,11 +112,9 @@ USE_TZ = True
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [BASE_DIR / "web" / "static"]
-STORAGES = {
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
-}
+WHITENOISE_USE_FINDERS = True
+
+# Use default storage - WhiteNoise handles compression via middleware
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # --- Sessions: kept in a signed, HttpOnly cookie, never in the database -----
